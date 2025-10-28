@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>湾智答 - 北部湾大学智能答疑助手</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0066cc', // 北部湾大学主色调
+            secondary: '#0099ff',
+            neutral: '#f0f4f8',
+            // 新增功能板块颜色
+            teacher: '#e63946',
+            parent: '#f4a261',
+            visitor: '#219ebc'
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .chat-shadow {
+        box-shadow: 0 4px 20px rgba(0, 102, 204, 0.1);
+      }
+      /* 反馈成功提示框样式 */
+      .feedback-alert {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 100;
+      }
+      /* 功能板块圆圈图片样式 */
+      .feature-circle {
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+        border-radius: 50%;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 font-sans">
+  <!-- 顶部导航 -->
+  <header class="bg-white shadow-sm sticky top-0 z-30">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="flex items-center space-x-3">
+        <!-- 替换为实际校徽 -->
+        <img src="/wzda-website/校徽.jpg" alt="北部湾大学校徽" class="w-10 h-10 rounded-full">
+        <h1 class="text-xl font-bold text-primary">湾智答</h1>
+      </div>
+      
+      <nav class="hidden md:flex space-x-6 text-sm">
+        <a href="#intro" class="text-gray-600 hover:text-primary transition-colors">介绍</a>
+        <a href="#function" class="text-gray-600 hover:text-primary transition-colors">功能</a>
+        <a href="#contact" class="text-gray-600 hover:text-primary transition-colors">反馈</a>
+      </nav>
+      
+      <button class="md:hidden text-gray-600" id="mobile-menu-btn">
+        <i class="fa fa-bars text-xl"></i>
+      </button>
+    </div>
+    
+    <!-- 移动端菜单 -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+      <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+        <a href="#intro" class="py-2 text-gray-600 hover:text-primary">介绍</a>
+        <a href="#function" class="py-2 text-gray-600 hover:text-primary">功能</a>
+        <a href="#contact" class="py-2 text-gray-600 hover:text-primary">反馈</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主内容区 -->
+  <main class="container mx-auto px-4 py-8">
+    <!-- 简介区域 -->
+    <section id="intro" class="mb-12 text-center max-w-3xl mx-auto">
+      <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-800 mb-4">北部湾大学智能答疑助手</h2>
+      <p class="text-gray-600 mb-6">
+        湾智答为师生、家长和访客提供7×24小时智能服务，解答校园生活、政策咨询、学习支持等各类问题
+      </p>
+      <div class="flex flex-wrap justify-center gap-3 text-sm text-gray-600">
+        <span class="flex items-center"><i class="fa fa-check-circle text-primary mr-1"></i> 实时响应</span>
+        <span class="flex items-center"><i class="fa fa-check-circle text-primary mr-1"></i> 精准解答</span>
+        <span class="flex items-center"><i class="fa fa-check-circle text-primary mr-1"></i> 全天候服务</span>
+      </div>
+    </section>
+    <!-- 智能体嵌入区域（核心：使用你的iframe） -->
+    <section class="max-w-4xl mx-auto mb-16">
+      <div class="bg-white rounded-xl chat-shadow overflow-hidden">
+        <!-- 智能体头部 -->
+        <div class="bg-primary text-white p-4 flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <img src="/wzda-website/校徽.jpg" alt="湾智答" class="w-8 h-8 rounded-full">
+            <h3 class="font-medium">湾智答</h3>
+            <span class="text-xs bg-white/20 px-2 py-0.5 rounded-full">在线</span>
+          </div>
+          <div class="flex space-x-3">
+            <button class="hover:text-white/80 transition-colors" title="刷新对话">
+              <i class="fa fa-refresh"></i>
+            </button>
+          </div>
+        </div>
+        
+        <!-- 调整高度为700px，显示更多对话内容 -->
+        <iframe
+ 	  src="http://171.111.194.87:9015/chatbot/9TL2c060zYzakz90"
+          style="width: 100%; height: 700px; border: none;"  <!-- 关键修改：height从500px改为700px -->
+          frameborder="0"
+          allow="microphone"
+        ></iframe>
+      </div>
+    </section>
+
+    <!-- 功能说明（已添加圆圈图片区域） -->
+    <section id="function" class="max-w-4xl mx-auto mb-16">
+      <h3 class="text-xl font-bold text-center mb-8 text-gray-800">主要功能</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- 师生服务（圆圈图片） -->
+        <div class="bg-white p-5 rounded-lg shadow-sm">
+          <div class="mb-4">
+            <img src="/wzda-website/师生服务.png" alt="师生服务" class="feature-circle border-4 border-teacher">
+          </div>
+          <h4 class="font-semibold mb-2 text-gray-800">师生服务</h4>
+          <p class="text-sm text-gray-600">课程查询、教务指导、图书馆资源、校园活动等全方位支持</p>
+        </div>
+        
+        <!-- 家长咨询（圆圈图片） -->
+        <div class="bg-white p-5 rounded-lg shadow-sm">
+          <div class="mb-4">
+            <img src="/wzda-website/家长咨询.png" alt="家长咨询" class="feature-circle border-4 border-parent">
+          </div>
+          <h4 class="font-semibold mb-2 text-gray-800">家长咨询</h4>
+          <p class="text-sm text-gray-600">学校政策、专业介绍、学生管理等信息查询服务</p>
+        </div>
+        
+        <!-- 访客指南（圆圈图片） -->
+        <div class="bg-white p-5 rounded-lg shadow-sm">
+          <div class="mb-4">
+            <img src="/wzda-website/访客指南.png" alt="访客指南" class="feature-circle border-4 border-visitor">
+          </div>
+          <h4 class="font-semibold mb-2 text-gray-800">访客指南</h4>
+          <p class="text-sm text-gray-600">校园参观、招生咨询、校企合作等信息指引</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 反馈区域（新增提交提示+自动返回功能） -->
+    <section id="contact" class="max-w-2xl mx-auto">
+      <h3 class="text-xl font-bold text-center mb-6 text-gray-800">问题反馈</h3>
+      <!-- 反馈表单：添加id用于绑定提交事件 -->
+      <form id="feedback-form" class="bg-white p-6 rounded-lg shadow-sm">
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-1">反馈内容</label>
+          <textarea 
+            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary text-sm"
+            rows="3"
+            placeholder="请输入您的建议或遇到的问题..."
+            required
+          ></textarea>
+        </div>
+        <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white py-2 rounded-lg transition-colors text-sm">
+          提交反馈
+        </button>
+      </form>
+    </section>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="bg-gray-800 text-white py-6 mt-12">
+    <div class="container mx-auto px-4 text-center text-sm text-gray-400">
+      <p>© 2023 北部湾大学 湾智答智能答疑助手</p>
+      <p class="mt-1">联系我们：wzda@bbgu.edu.cn</p>
+    </div>
+  </footer>
+
+  <!-- 交互脚本 -->
+  <script>
+    // 移动端菜单切换
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        document.querySelector(targetId).scrollIntoView({
+          behavior: 'smooth'
+        });
+        // 关闭移动菜单
+        if (!mobileMenu.classList.contains('hidden')) {
+          mobileMenu.classList.add('hidden');
+        }
+      });
+    });
+
+    // 刷新iframe功能
+    document.querySelector('.fa-refresh').parentElement.addEventListener('click', function() {
+      const iframe = document.querySelector('iframe');
+      iframe.src = iframe.src; // 重新加载iframe，刷新对话
+    });
+
+    // 新增：反馈表单提交逻辑（提示+5秒返回主页）
+    const feedbackForm = document.getElementById('feedback-form');
+    
+    feedbackForm.addEventListener('submit', function(e) {
+      e.preventDefault(); // 阻止表单默认提交行为
+      
+      // 1. 创建并显示反馈成功提示框
+      const alertBox = document.createElement('div');
+      alertBox.className = 'feedback-alert bg-white p-6 rounded-xl shadow-lg text-center';
+      alertBox.innerHTML = `
+        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i class="fa fa-check text-green-500 text-2xl"></i>
+        </div>
+        <h4 class="text-lg font-semibold text-gray-800 mb-2">反馈提交成功！</h4>
+        <p class="text-gray-600 mb-3">感谢您的反馈，我们会尽快处理~</p>
+        <p class="text-sm text-gray-500">将在 <span id="countdown" class="text-primary font-medium">5</span> 秒后返回主页</p>
+      `;
+      document.body.appendChild(alertBox);
+      
+      // 2. 添加页面遮罩（增强提示框视觉焦点）
+      const overlay = document.createElement('div');
+      overlay.className = 'fixed inset-0 bg-black/50 z-90';
+      document.body.appendChild(overlay);
+      
+      // 3. 5秒倒计时，结束后返回主页（#intro为简介区域，即主页核心内容）
+      let countdown = 5;
+      const countdownEl = document.getElementById('countdown');
+      
+      const timer = setInterval(() => {
+        countdown--;
+        countdownEl.textContent = countdown;
+        
+        if (countdown <= 0) {
+          clearInterval(timer);
+          // 移除提示框和遮罩
+          document.body.removeChild(alertBox);
+          document.body.removeChild(overlay);
+          // 滚动到主页（简介区域）
+          document.querySelector('#intro').scrollIntoView({
+            behavior: 'smooth'
+          });
+          // 重置表单内容
+          feedbackForm.reset();
+        }
+      }, 1000);
+    });
+  </script>
+</body>
+
+</html>
+
